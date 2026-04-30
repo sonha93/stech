@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thẻ nhớ IMOU</title>
+
+<!-- CSS FILE -->
+<link rel="stylesheet" href="style.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{background:#f5f7fa;}
+
+/* HEADER */
+header{
+  background:#d70018;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+/* MENU 3 GẠCH */
+.menu{
+  font-size:26px;
+  cursor:pointer;
+  padding:5px 10px;
+}
+
+/* LOGO KHÔNG VIỀN */
+.logo img{
+  height:38px;
+  width:auto;
+  border:0;
+  outline:0;
+  box-shadow:none;
+  background:transparent;
+  display:block;
+}
+
+/* SEARCH */
+header input{
+  flex:1;
+  padding:8px;
+  border:none;
+  border-radius:6px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:#111;
+  color:#fff;
+  padding:20px;
+  transition:0.3s;
+  z-index:2000;
+}
+
+.sidebar a{
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  margin:12px 0;
+}
+
+.sidebar.active{left:0;}
+
+/* OVERLAY */
+#overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  z-index:1500;
+}
+
+#overlay.active{display:block;}
+
+/* GRID */
+.container{padding:20px;}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+
+.info{padding:10px;}
+
+.title{font-weight:bold;margin-bottom:6px;}
+
+.price{color:#d70018;font-weight:bold;}
+
+.old{
+  text-decoration:line-through;
+  color:#888;
+  font-size:12px;
+}
+
+.tag{
+  display:inline-block;
+  background:#ffb300;
+  color:#fff;
+  font-size:11px;
+  padding:3px 6px;
+  border-radius:5px;
+  margin-top:5px;
+}
+
+/* BTN */
+.btn{
+  margin-top:8px;
+  width:100%;
+  padding:8px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+/* SPEC */
+.spec{
+  display:none;
+  margin-top:8px;
+  font-size:12px;
+  background:#f8f8f8;
+  padding:8px;
+  border-radius:6px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- OVERLAY -->
+<div id="overlay" onclick="toggleMenu()"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <h3>Danh mục</h3>
+  <a href="shop-camera.index.html">🏠 Trang chủ</a>
+  <a href="camera-trong-nha.html">📷 Camera trong nhà</a>
+  <a href="camera-ngoai-troi.html">🌧 Camera ngoài trời</a>
+  <a href="the-nho.html">💾 Thẻ nhớ</a>
+  <a href="combo/index.html">🎁 Combo</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="menu" onclick="toggleMenu()">☰</div>
+
+  <div class="logo">
+    <img src="https://i.ibb.co/Z1kv9nJj/logo.png">
+  </div>
+
+  <input placeholder="Tìm thẻ nhớ IMOU...">
+</header>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="grid" id="products"></div>
+</div>
+
+<script>
+const products=[
+  {id:1,name:"IMOU 32GB",price:85000,old:120000,badge:"SALE",img:"https://via.placeholder.com/300",spec:{d:"32GB",r:"80MB/s",w:"30MB/s",c:"MicroSDHC",b:"12 tháng"}},
+  {id:2,name:"IMOU 64GB",price:125000,old:180000,badge:"BEST",img:"https://via.placeholder.com/300",spec:{d:"64GB",r:"100MB/s",w:"60MB/s",c:"MicroSDXC",b:"12 tháng"}},
+  {id:3,name:"IMOU 128GB",price:190000,old:280000,badge:"HOT",img:"https://via.placeholder.com/300",spec:{d:"128GB",r:"120MB/s",w:"80MB/s",c:"UHS-I",b:"24 tháng"}},
+  {id:4,name:"IMOU 256GB",price:320000,old:450000,badge:"PRO",img:"https://via.placeholder.com/300",spec:{d:"256GB",r:"160MB/s",w:"100MB/s",c:"UHS-I A2",b:"24 tháng"}}
+];
+
+function render(){
+  const box=document.getElementById("products");
+  box.innerHTML="";
+
+  products.forEach(p=>{
+    box.innerHTML+=`
+    <div class="card">
+      <img src="${p.img}">
+      <div class="info">
+
+        <div class="title">${p.name}</div>
+        <div class="price">${p.price.toLocaleString()}đ</div>
+        <div class="old">${p.old.toLocaleString()}đ</div>
+
+        <div class="tag">${p.badge}</div>
+
+        <button class="btn" onclick="toggleSpec(${p.id})">⚙️ Thông số</button>
+
+        <div class="spec" id="spec-${p.id}">
+          📦 ${p.spec.d}<br>
+          📥 Đọc: ${p.spec.r}<br>
+          📤 Ghi: ${p.spec.w}<br>
+          💾 ${p.spec.c}<br>
+          🛡 ${p.spec.b}
+        </div>
+
+      </div>
+    </div>
+    `;
+  });
+}
+
+function toggleSpec(id){
+  const el=document.getElementById("spec-"+id);
+  el.style.display=(el.style.display==="block")?"none":"block";
+}
+
+function toggleMenu(){
+  document.getElementById("sidebar").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+}
+
+render();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial;
+}
+
+body {
+  background: #f5f5f5;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #ee4d2d;
+  color: white;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+header input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* LAYOUT */
+.container {
+  display: flex;
+}
+
+/* PRODUCTS */
+.products {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.item {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.item h4 {
+  font-size: 14px;
+  padding: 5px;
+  height: 38px;
+  overflow: hidden;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: #ee4d2d;
+  color: white;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 5px;
+}
+
+/* PRICE */
+.price-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.price {
+  color: #ee4d2d;
+  font-weight: bold;
+}
+
+.old-price {
+  font-size: 12px;
+  color: gray;
+  text-decoration: line-through;
+}
+
+.item button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: #ee4d2d;
+  color: white;
+}
+
+/* CART */
+.cart {
+  flex: 1;
+  background: white;
+  padding: 10px;
+}
+
+/* ITEM GIỎ HÀNG */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  left: -240px;
+  top: 0;
+  width: 220px;
+  height: 100%;
+  background: #222;
+  color: white;
+  padding: 10px;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar button {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  background: #333;
+  color: white;
+  border: none;
+}
+
+/* OVERLAY */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+}
+
+#overlay.active {
+  display: block;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* KHUNG THÔNG SỐ */
+.spec-box {
+  margin: 6px;
+  padding: 6px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.spec-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* SLIDER */
+.spec-slider {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.spec-track {
+  display: flex;
+  gap: 10px;
+}
+
+.spec-track div {
+  background: white;
+  padding: 5px 8px;
+  border-radius: 6px;
+  min-width: 140px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.spec-box {
+  font-size: 12px;
+  background: #f5f5f5;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+.spec-btn {
+  width: 100%;
+  padding: 6px;
+  margin: 5px 0;
+  background: #444;
+  color: white;
+  border: none;
+  font-size: 13px;
+  border-radius: 5px;
+}
+
+.spec-box {
+  font-size: 12px;
+  background: #f5f5f5;
+  margin: 5px;
+  padding: 8px;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+/* NÚT 3 GẠCH */
+header div {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  color: #ee4d2d;
+  font-size: 22px;
+  font-weight: bold;
+
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: 0.2s;
+}
+
+header div:hover {
+  transform: scale(1.05);
+}
+
+/* SIDEBAR LINK */
+.sidebar a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  background: #333;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.sidebar a:hover {
+  background: #ee4d2d;
+}
+
+/* OVERLAY */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+}
+
+#overlay.active {
+  display: block;
+}
+.sidebar {
+  position: fixed;
+  left: -240px;
+  top: 0;
+  width: 220px;
+  height: 100vh;   /* quan trọng: full màn hình */
+  background: #222;
+  color: white;
+  padding: 20px 10px; /* thêm padding trên để không bị che */
+  padding-top: 60px;  /* CHỖ FIX CHÍNH */
+  transition: 0.3s;
+  z-index: 2000;
+
+  overflow-y: auto; /* nếu dài thì scroll được */
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 3000; /* cao hơn sidebar */
+}
+.sidebar h3 {
+  position: sticky;
+  top: 0;
+  background: #222;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+.wrapper{
+  width:1200px;
+  background:#fff;
+  margin:0 auto;
+  box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+.footer{
+  background:#cc1f1f;
+  color:#ddd;
+  margin-top:20px;
+  padding:18px 10px;
+  text-align:center;
+}
+
+.footer-box{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.footer h3{
+  color:#fff;
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.footer p{
+  font-size:13px;
+  margin:4px 0;
+  line-height:1.5;
+}
+
+.footer p:nth-child(2){
+  color:#ccc;
+}
+
+.footer p:nth-child(3),
+.footer p:nth-child(4){
+  color:#eee;
+}
+
+.footer .copyright{
+  margin-top:10px;
+  font-size:12px;
+  color:#e04242;
+  border-top:1px solid #df3838;
+  padding-top:8px;
+}
+.cart {
+  position: fixed;
+  right: -350px;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+  padding: 15px;
+  transition: 0.3s;
+  z-index: 999;
+}
+
+.cart.active {
+  right: 0;
+}
+
+.cart-footer {
+  margin-top: 20px;
+}
+.cart {
+  position: fixed;
+  right: -320px;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+  padding: 15px;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.cart.active {
+  right: 0;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  header input {
+    width: 100%;
+  }
+}
