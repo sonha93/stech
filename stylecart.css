@@ -221,21 +221,3 @@ body{
     padding:10px;
   }
 }
-.row-info{
-  display:flex;
-  gap:6px;
-  flex-wrap:nowrap;        /* KHÔNG xuống dòng */
-  overflow:hidden;
-}
-
-.row-info span{
-  font-size:12px;
-  background:#f5f5f5;
-  padding:4px 6px;
-  border-radius:6px;
-
-  white-space:nowrap;      /* không vỡ chữ */
-  overflow:hidden;
-  text-overflow:ellipsis;
-  max-width:90px;          /* khóa độ rộng */
-}
