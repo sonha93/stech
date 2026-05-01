@@ -30,9 +30,9 @@ function renderCart() {
           <h4>${p.name}</h4>
 
           <div class="row-info">
-            <span>Số Lượng: </p>${qty}</span>
-            <span> Đơn giá: </p>${price.toLocaleString()}đ</span>
-            <span> Thành tiền: </p>${subTotal.toLocaleString()}đ</span>
+            <span>Số Lượng: ${qty}</span>
+            <span> Đơn giá: ${price.toLocaleString()}đ</span>
+            <span> Thành tiền:${subTotal.toLocaleString()}đ</span>
           </div>
 
         </div>
