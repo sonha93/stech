@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Camera Pro</title>
+<title>LIÊN HỆ STECH CAMERA</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="stylelien-he.css">
 
 <style>
 /* LOGO KHÔNG VIỀN */
@@ -19,86 +19,53 @@
   background:transparent;
 }
 </style>
-
 </head>
 
 <body>
 
-<div id="overlay" onclick="toggleMenu()"></div>
-
-<!-- MENU -->
-<div class="sidebar" id="sidebar">
-  <h3>Danh mục</h3>
-
-  <a href="index.html">🏠 Trang chủ</a>
- <a href="cart.html" class="cart-link">🛒 Giỏ hàng</a>
-  <a href="camera-trong-nha.html">📷 Camera trong nhà</a>
-  <a href="camera-ngoai-troi.html">🌧 Camera ngoài trời</a>
-  <a href="the-nho.html">💾 Thẻ nhớ</a>
-  <a href="combo/index.html">🎁 Combo khuyến mãi</a>
-</div>
-
 <!-- HEADER -->
-<header>
-  <div onclick="toggleMenu()">☰</div>
+<header class="header">
 
-  <!-- LOGO -->
   <div class="logo">
     <img src="https://i.ibb.co/Z1kv9nJj/logo.png" alt="logo">
   </div>
 
-  <input id="search" placeholder="Tìm kiếm sản phẩm...">
+  <a href="index.html" class="home-btn">Trang chủ</a>
+
 </header>
 
-<!-- CONTENT -->
+<!-- 🌟 INFO BOX (kiểu Shopee) -->
 <div class="container">
-  <div class="products" id="products"></div>
-</div>
+  <div class="card">
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-container">
+    <h2>📞 Liên hệ STech Camera</h2>
 
-    <h3>StechCamera</h3>
-
-    <p>📍 Website chuyên cung cấp camera an ninh chính hãng</p>
-    <p>📞 Hotline: 0985.678.245</p>
-    <p>📧 Email: support@stechcamera.vn</p>
-
-    <hr>
-
-    <p>© 2026 StechCamera. All rights reserved.</p>
-    <p>Designed & Developed by StechCamera Team</p>
+    <div class="info-box">
+      <div class="item">📞 <b>Hotline:</b> <a href="tel:0985678245">0985 678 245</a></div>
+      <div class="item">📍 <b>Địa chỉ:</b> Đông Thuận, Quảng Trị</div>
+      <div class="item">📧 <b>Email:</b> support@stechcamera.vn</div>
+    </div>
 
   </div>
+</div>
+
+<!-- 🧭 MAP FULL WIDTH -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps?q=phường%20Đông%20Thuận%20Quảng%20Trị&output=embed">
+  </iframe>
+</div>
+
+<!-- ⚫ FOOTER -->
+<footer class="footer">
+  © 2026 STechCamera
 </footer>
 
-<script src="app.js"></script>
-<script src="script.js"></script>
-<script>
-function toggleMenu(){
-  document.getElementById("sidebar").classList.toggle("active");
-  document.getElementById("overlay").classList.toggle("active");
-}
-</script>
+<!-- 📞 FLOAT BUTTON GỌI NGAY -->
+<a href="tel:0985678245" class="call-btn">📞 Gọi ngay</a>
+
+<!-- 💬 ZALO BUTTON -->
+<a href="https://zalo.me/0985678245" class="zalo-btn">💬 Zalo</a>
 
 </body>
 </html>
-<div class="bottom-nav">
-
-
-  <a href="lien-he.html">
-    <span>🛒</span>
-    LIÊN HỆ
-  </a>
-
-  <a href="bao-hanh.html">
-    <span>💳</span>
-    CHÍNH SÁCH BẢO HÀNH
-  </a>
-
-  <a href="orders.html">
-    <span>📦</span>
-    Đơn
-  </a>
-</div>
