@@ -30,16 +30,13 @@ function renderCart() {
           <h4>${p.name}</h4>
 
           <div class="row-info">
-            <span>Số Lượng: ${qty}</span>
-            <span> Đơn giá: ${price.toLocaleString()}đ</span>
-            <span> Thành tiền:${subTotal.toLocaleString()}đ</span>
+            <span>SL: ${qty}</span>
+            <span>ĐG: ${price.toLocaleString()}đ</span>
+            <span>Tổng: ${subTotal.toLocaleString()}đ</span>
           </div>
-
         </div>
 
-        <button class="remove" onclick="removeItem(${index})">
-          Xoá
-        </button>
+        <button class="remove" onclick="removeItem(${index})">Xoá</button>
       </div>
     `;
   });
