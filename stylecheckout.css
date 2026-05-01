@@ -1,228 +1,149 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>Thanh toán</title>
-
-<style>
 body{
-  font-family: Arial;
-  background:#f5f5f5;
-  margin:0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #f5f7fa, #e9eef5);
 }
 
+/* ===== CONTAINER FULL ===== */
 .container{
-  max-width:800px;
-  margin:auto;
-  padding:20px;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* ===== BOX ===== */
 .box{
-  background:#fff;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:15px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: 0.2s;
 }
 
-/* ITEM */
+.box:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+/* ===== TITLE ===== */
+h2, h3{
+  margin: 0 0 10px;
+  color: #222;
+}
+
+/* ===== INPUT ===== */
+input, textarea, select{
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus, textarea:focus, select:focus{
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+  outline: none;
+}
+
+/* ===== ITEM CART ===== */
 .item{
-  display:flex;
-  gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid #eee;
-  align-items:center;
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  align-items: center;
 }
 
 .item img{
-  width:70px;
-  height:70px;
-  object-fit:contain;
-  border-radius:8px;
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-/* SL × GIÁ */
-.calc{
-  display:flex;
-  gap:6px;
-  font-size:12px;
-  color:#666;
-  margin-top:5px;
-  align-items:center;
+/* PRICE */
+.price{
+  color: #e11d48;
+  font-weight: bold;
 }
 
-.calc span{
-  min-width:12px;
-  text-align:center;
-}
-
-/* INPUT */
-input, textarea, select{
-  width:100%;
-  padding:10px;
-  margin-top:6px;
-  margin-bottom:10px;
-  border:1px solid #ddd;
-  border-radius:8px;
-}
-
-/* BUTTON */
+/* ===== BUTTON ===== */
 .btn{
-  width:100%;
-  padding:12px;
-  background:#ee4d2d;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
-  cursor:pointer;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .btn:hover{
-  background:#d84315;
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(79,70,229,0.3);
 }
 
-/* BANK */
-#bankInfo{
-  display:none;
-  background:#fff;
-  padding:10px;
-  border-radius:8px;
-  margin-top:10px;
+/* ===== BANK BOX ===== */
+#bankBox{
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 12px;
+  animation: fadeIn 0.3s ease;
 }
 
-/* TOTAL CUỐI */
+#bankBox img{
+  width: 160px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* ===== TOTAL ===== */
 .total{
-  text-align:right;
-  font-size:18px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #111;
+  margin-top: 10px;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.row-info{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  font-size:12px;
+}
+
+.row-info span{
+  background:#f5f5f5;
+  padding:4px 8px;
+  border-radius:6px;
+}
+
+/* dòng tính tiền nổi bật */
+.total-line{
+  background:#e11d48;
+  color:#fff;
   font-weight:bold;
-  color:#ee4d2d;
-  margin-top:10px;
 }
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h2>💳 Thanh toán đơn hàng</h2>
-
-<!-- GIỎ HÀNG -->
-<div class="box" id="cartBox"></div>
-
-<!-- THÔNG TIN -->
-<div class="box">
-  <h3>📦 Thông tin giao hàng</h3>
-  <input id="name" placeholder="Họ tên">
-  <input id="phone" placeholder="Số điện thoại">
-  <textarea id="address" placeholder="Địa chỉ"></textarea>
-</div>
-
-<!-- THANH TOÁN -->
-<div class="box">
-  <h3>💰 Thanh toán</h3>
-
-  <select id="payment">
-    <option value="cod">COD</option>
-    <option value="bank">Chuyển khoản</option>
-  </select>
-
-  <div id="bankInfo">
-    <h3>🏦 Vietinbank</h3>
-    <p>HOANG ANH SON</p>
-    <p>101005245058</p>
-
-    <img id="qr"
-      style="width:100%;max-width:250px;margin-top:10px;border-radius:8px;">
-  </div>
-</div>
-
-<button class="btn" onclick="placeOrder()">🛒 Đặt hàng</button>
-
-</div>
-
-<script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function renderCart(){
-  const box = document.getElementById("cartBox");
-  box.innerHTML = "";
-
-  if(cart.length === 0){
-    box.innerHTML = "Giỏ hàng trống";
-    return;
-  }
-
-  let total = 0;
-
-  cart.forEach(p=>{
-    let qty = p.qty || 1;
-    let price = p.price;
-    let sub = qty * price;
-
-    total += sub;
-
-    box.innerHTML += `
-      <div class="item">
-        <img src="${p.img}">
-
-        <div>
-          <b>${p.name}</b>
-
-          <!-- CHỈ SL × GIÁ = THÀNH TIỀN -->
-          <div class="calc">
-            <span>${qty}</span>
-            <span>×</span>
-            <span>${price.toLocaleString()}đ</span>
-            <span>=</span>
-            <span>${sub.toLocaleString()}đ</span>
-          </div>
-
-        </div>
-      </div>
-    `;
-  });
-
-  box.innerHTML += `
-    <div class="total">
-      Tổng tiền: ${total.toLocaleString()}đ
-    </div>
-  `;
-}
-
-/* BANK */
-function updateBank(){
-  let payment = document.getElementById("payment").value;
-  let bank = document.getElementById("bankInfo");
-
-  let total = 0;
-  cart.forEach(p=>{
-    total += p.price * (p.qty || 1);
-  });
-
-  if(payment === "bank"){
-    bank.style.display = "block";
-
-    document.getElementById("qr").src =
-      "https://img.vietqr.io/image/ICB-101005245058-compact2.png?amount="
-      + total +
-      "&addInfo=Thanh%20toan";
-  } else {
-    bank.style.display = "none";
-  }
-}
-
-document.getElementById("payment").addEventListener("change", updateBank);
-
-function placeOrder(){
-  alert("Đặt hàng thành công 🎉");
-  localStorage.removeItem("cart");
-  window.location.href = "index.html";
-}
-
-renderCart();
-updateBank();
-</script>
-
-</body>
-</html>
