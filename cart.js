@@ -32,7 +32,7 @@ function renderCart() {
           <div class="row-info">
             <span>Số Lượng: </p>${qty}</span>
             <span> Đơn giá: </p>${price.toLocaleString()}đ</span>
-            <span> Thành tiền: <p/>${subTotal.toLocaleString()}đ</span>
+            <span> Thành tiền: </p>${subTotal.toLocaleString()}đ</span>
           </div>
 
         </div>
