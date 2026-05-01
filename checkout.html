@@ -24,11 +24,13 @@ body{
   margin-bottom:15px;
 }
 
+/* ITEM */
 .item{
   display:flex;
   gap:10px;
   padding:10px 0;
   border-bottom:1px solid #eee;
+  align-items:center;
 }
 
 .item img{
@@ -38,11 +40,22 @@ body{
   border-radius:8px;
 }
 
-.price{
-  color:#ee4d2d;
-  font-weight:bold;
+/* SL × GIÁ */
+.calc{
+  display:flex;
+  gap:6px;
+  font-size:12px;
+  color:#666;
+  margin-top:5px;
+  align-items:center;
 }
 
+.calc span{
+  min-width:12px;
+  text-align:center;
+}
+
+/* INPUT */
 input, textarea, select{
   width:100%;
   padding:10px;
@@ -52,6 +65,7 @@ input, textarea, select{
   border-radius:8px;
 }
 
+/* BUTTON */
 .btn{
   width:100%;
   padding:12px;
@@ -67,11 +81,21 @@ input, textarea, select{
   background:#d84315;
 }
 
+/* BANK */
 #bankInfo{
   display:none;
   background:#fff;
   padding:10px;
   border-radius:8px;
+  margin-top:10px;
+}
+
+/* TOTAL CUỐI */
+.total{
+  text-align:right;
+  font-size:18px;
+  font-weight:bold;
+  color:#ee4d2d;
   margin-top:10px;
 }
 </style>
@@ -86,7 +110,7 @@ input, textarea, select{
 <!-- GIỎ HÀNG -->
 <div class="box" id="cartBox"></div>
 
-<!-- THÔNG TIN KHÁCH -->
+<!-- THÔNG TIN -->
 <div class="box">
   <h3>📦 Thông tin giao hàng</h3>
   <input id="name" placeholder="Họ tên">
@@ -99,19 +123,17 @@ input, textarea, select{
   <h3>💰 Thanh toán</h3>
 
   <select id="payment">
-    <option value="cod">COD (Thanh toán khi nhận hàng)</option>
-    <option value="bank">Chuyển khoản ngân hàng</option>
+    <option value="cod">COD</option>
+    <option value="bank">Chuyển khoản</option>
   </select>
 
-  <!-- BANK INFO -->
   <div id="bankInfo">
     <h3>🏦 Vietinbank</h3>
-    <p><b>Chủ tài khoản:</b> HOANG ANH SON</p>
-    <p><b>Số tài khoản:</b> 101005245058</p>
+    <p>HOANG ANH SON</p>
+    <p>101005245058</p>
 
     <img id="qr"
       style="width:100%;max-width:250px;margin-top:10px;border-radius:8px;">
-      
   </div>
 </div>
 
@@ -122,7 +144,6 @@ input, textarea, select{
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* render giỏ hàng */
 function renderCart(){
   const box = document.getElementById("cartBox");
   box.innerHTML = "";
@@ -135,27 +156,44 @@ function renderCart(){
   let total = 0;
 
   cart.forEach(p=>{
-    total += p.price * (p.qty || 1);
+    let qty = p.qty || 1;
+    let price = p.price;
+    let sub = qty * price;
+
+    total += sub;
 
     box.innerHTML += `
       <div class="item">
         <img src="${p.img}">
+
         <div>
-          <b>${p.name}</b><br>
-          <span class="price">${(p.price*(p.qty||1)).toLocaleString()}đ</span>
+          <b>${p.name}</b>
+
+          <!-- CHỈ SL × GIÁ = THÀNH TIỀN -->
+          <div class="calc">
+            <span>${qty}</span>
+            <span>×</span>
+            <span>${price.toLocaleString()}đ</span>
+            <span>=</span>
+            <span>${sub.toLocaleString()}đ</span>
+          </div>
+
         </div>
       </div>
     `;
   });
 
-  box.innerHTML += `<h3>Tổng: ${total.toLocaleString()}đ</h3>`;
+  box.innerHTML += `
+    <div class="total">
+      Tổng tiền: ${total.toLocaleString()}đ
+    </div>
+  `;
 }
 
-/* QR + BANK */
+/* BANK */
 function updateBank(){
   let payment = document.getElementById("payment").value;
-  let bankBox = document.getElementById("bankInfo");
-  let qr = document.getElementById("qr");
+  let bank = document.getElementById("bankInfo");
 
   let total = 0;
   cart.forEach(p=>{
@@ -163,38 +201,25 @@ function updateBank(){
   });
 
   if(payment === "bank"){
-    bankBox.style.display = "block";
+    bank.style.display = "block";
 
-    qr.src =
+    document.getElementById("qr").src =
       "https://img.vietqr.io/image/ICB-101005245058-compact2.png?amount="
       + total +
-      "&addInfo=Thanh%20toan%20don%20hang";
-      
+      "&addInfo=Thanh%20toan";
   } else {
-    bankBox.style.display = "none";
+    bank.style.display = "none";
   }
 }
 
 document.getElementById("payment").addEventListener("change", updateBank);
 
-/* đặt hàng */
 function placeOrder(){
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-
-  if(!name || !phone || !address){
-    alert("Vui lòng nhập đầy đủ thông tin!");
-    return;
-  }
-
   alert("Đặt hàng thành công 🎉");
-
   localStorage.removeItem("cart");
   window.location.href = "index.html";
 }
 
-/* init */
 renderCart();
 updateBank();
 </script>
