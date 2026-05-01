@@ -154,3 +154,70 @@ body{
     height:80px;
   }
 }
+@media (max-width: 768px){
+
+  /* giảm font toàn bộ */
+  body{
+    font-size:14px;
+  }
+
+  /* item gọn hơn */
+  .item{
+    padding:10px;
+    gap:10px;
+  }
+
+  /* ảnh nhỏ lại */
+  .item img{
+    width:70px;
+    height:70px;
+  }
+
+  /* tên sản phẩm KHÔNG xuống dòng */
+  .info h4{
+    font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:160px;
+  }
+
+  /* row info không vỡ hàng */
+  .row-info{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+  }
+
+  .row-info span{
+    font-size:11px;
+    white-space:nowrap;
+  }
+
+  /* nút + - nhỏ lại */
+  .qty-box button{
+    width:22px;
+    height:22px;
+    font-size:14px;
+  }
+
+  .qty-box span{
+    font-size:13px;
+  }
+
+  /* nút xoá nhỏ */
+  .remove{
+    padding:5px 8px;
+    font-size:11px;
+  }
+
+  /* total nhỏ lại */
+  .total{
+    font-size:16px;
+  }
+
+  /* checkout gọn */
+  .checkout{
+    font-size:15px;
+    padding:10px;
+  }
+}
